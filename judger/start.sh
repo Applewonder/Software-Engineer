@@ -16,7 +16,3 @@ do
         g++ $f -o ./"${i%.cpp}"
     fi
 done
-
-
-
-a.out <input.txt >ouput.txt
