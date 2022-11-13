@@ -12,20 +12,18 @@
 
 class input {
     private:
-
+        
 
 
 
 
     public:
         int random_int(int a, int b) {
-            srand(time(nullptr));
             int res = (rand () % (b-a+1)) + a;
             return res;
         }
 
         char random_char() {
-            srand(time(nullptr));
             int res = (rand () % 52);
             if (res < 26) {
                 char ascii_num = res + 65;
@@ -37,7 +35,6 @@ class input {
         }
 
         std::string random_string(int a, int b) {
-            srand(time(nullptr));
             int res = (rand () % (b-a+1)) + a;
             std::string s_res = "";
             for (int i = 0; i < res; i++) {
@@ -48,9 +45,11 @@ class input {
 
 
         void build_input_type() {
-            for (auto& i : std::filesystem::directory_iterator("./../input")) {
-		        if (std::filesystem::is_directory(i)) {
-                    std::string subpath = i.path();
+            int count_folder = 0;
+            for (auto& f : std::filesystem::directory_iterator("./../input")) {
+		        if (std::filesystem::is_directory(f)) {
+                    count_folder ++;
+                    std::string subpath = f.path();
                     std::string content;
                     subpath += "/stdin_format.txt";
                     std::ifstream rfile;
@@ -67,17 +66,17 @@ class input {
                             std::string right_limit = num_range.substr(pos+1);
                             int l_lim = std::stoi(left_limit);
                             int r_lim = std::stoi(right_limit);
-                            for (int i = 0; i < 10; i++) {
+                            for (int i = 1; i <= 3; i++) {
                                 int res = random_int(l_lim, r_lim);
                                 std::fstream rwrite;
-                                rwrite.open("./r_input/1/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
+                                rwrite.open("./r_input/"+ std::to_string(count_folder) +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
                                 rwrite <<  std::to_string(res) << " ";
                             }
                         } else if (cur_token.substr(0,4) == "char") {
-                            for (int i = 0; i < 10; i++) {
+                            for (int i = 1; i <= 3; i++) {
                                 char res = random_char();
                                 std::fstream rwrite;
-                                rwrite.open("./r_input/1/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
+                                rwrite.open("./r_input/" + std::to_string(count_folder) +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
                                 rwrite << res << " ";
                             }
                         } else if (cur_token.substr(0,6) == "string") {
@@ -88,13 +87,14 @@ class input {
                             std::string right_limit = num_range.substr(pos+1);
                             int l_lim = std::stoi(left_limit);
                             int r_lim = std::stoi(right_limit);
-                            for (int i = 0; i < 10; i++) {
+                            for (int i = 1; i <= 3; i++) {
                                 std::string res = random_string(l_lim, r_lim);
                                 std::fstream rwrite;
-                                rwrite.open("./r_input/1/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
+                                rwrite.open("./r_input/" + std::to_string(count_folder) +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
                                 rwrite << res << " ";
                             }
                         }
+                        cur_token = "";
                     }
                     rfile.close();
                 }
