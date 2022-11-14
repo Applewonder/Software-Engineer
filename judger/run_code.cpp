@@ -9,7 +9,7 @@
 # include <set>
 # include <cstdlib>
 
-//
+//./r_compile/folder_name
 
 class run_code {
     private:
@@ -25,11 +25,11 @@ class run_code {
         }
 
         void compile_files() {
-            int count_folder = 0;
             for (auto& f : std::filesystem::directory_iterator("./../input")) {
                 if (std::filesystem::is_directory(f)) {
-                    count_folder ++;
                     std::string subpath = f.path();
+                    int l_cut = subpath.find("/");
+                    std::string folder_name = subpath.substr(l_cut + 1);
                     for (auto& test_file : std::filesystem::directory_iterator(subpath)) {
                         std::string path = test_file.path();
                         if (path.length() < 4) continue;
@@ -40,7 +40,7 @@ class run_code {
                             std::string file_name = path.substr(0, pos);
                             insert_map(subpath, file_name);
                             file_name = file_name.substr(down_pos + 1);
-                            std::string compile_command = "gcc " + path + " -o ./r_compile/" + std::to_string(count_folder) + "/" + file_name;
+                            std::string compile_command = "gcc " + path + " -o ./r_compile/" + folder_name + "/" + file_name;
                             std::cout << compile_command << std::endl;
                             system(compile_command.c_str());
                         } 

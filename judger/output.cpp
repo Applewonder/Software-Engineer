@@ -4,6 +4,9 @@
 # include <set>
 # include<fstream>
 
+//./../output/
+
+
 class output {
     private:
         std::set<std::string> equiv;

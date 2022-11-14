@@ -8,6 +8,7 @@
 # include<ctime>
 # include<cstdlib>
 
+//./r_input/folder_name/test_case.txt
 
 
 class input {

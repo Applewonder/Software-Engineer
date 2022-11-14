@@ -1,18 +1,20 @@
 #!/bin/bash
+
 echo "Steins Gate Start!"
 
-mkdir compiled
-cd compiled
+mkdir r_compile
+mkdir r_input
+mkdir r_output
+mkdir ./../output
 
 path=$1
 
 for file in $(ls $path);
 do 
-    if [ "${file##*.}" = "cpp" ]; then
-        echo "Now compile ${file}\n"
-        file_a=(basename $file .cpp)
-        echo "$file_a" >> filelist.txt
-        echo "\n" >> filelist.txt
-        g++ $f -o ./"${i%.cpp}"
-    fi
+   if test -d $file
+   then
+      mkdir ./r_input/$file
+      mkdir ./r_compile/$file
+      mkdir ./r_output/$file
+    
 done
