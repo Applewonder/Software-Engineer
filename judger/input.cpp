@@ -1,6 +1,9 @@
 # include<iostream>
 # include<vector>
 
-class input {
-    
-}
+class judge_diff {
+    private:
+
+    public:
+        
+};
