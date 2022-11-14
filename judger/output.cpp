@@ -1,12 +1,13 @@
 # include<iostream>
-#include <iterator>
+# include <iterator>
 # include<vector>
+# include <set>
 # include<fstream>
 
 class output {
     private:
-        std::vector<std::string> equiv;
-        std::vector<std::string> in_equiv;
+        std::set<std::string> equiv;
+        std::set<std::string> in_equiv;
 
     public:
 
@@ -23,17 +24,28 @@ class output {
             std::ofstream target_file;
             target_file.open(path_to_file, std::ios::out|std::ios::app);
             if (is_equal) {
-                for (int i = 0; i < equiv.size(); i ++) {
-                    for (int j = i + 1; j < equiv.size(); j ++) {
-                        target_file << equiv.at(i) << ", " << equiv.at(j) << std::endl;
+                for (auto it = equiv.begin(); it != equiv.end(); it ++) {
+                    for (auto it_sec = it; it_sec != equiv.end(); it_sec ++) {
+                        if (it_sec == it) it_sec ++;
+                        target_file << *it << ", " << *it_sec << std::endl;
                     }
                 }
             } else {
-                for (int i = 0; i < equiv.size(); i ++) {
-                    for (int j = i + 1; j < in_equiv.size(); j ++) {
-                        target_file << in_equiv.at(i) << ", " << in_equiv.at(j) << std::endl;
+                for (auto it = in_equiv.begin(); it != in_equiv.end(); it ++) {
+                    for (auto it_sec = it; it_sec != in_equiv.end(); it_sec ++) {
+                        if (it_sec == it) it_sec ++;
+                        target_file << *it << ", " << *it_sec << std::endl;
                     }
                 }
             }
         }
+
+        void insert_equiv(std::string path_to_file) {
+            equiv.insert(path_to_file);
+        }
+
+        void insert_in_equiv(std::string path_to_file) {
+            in_equiv.insert(path_to_file);
+        }
+
 };

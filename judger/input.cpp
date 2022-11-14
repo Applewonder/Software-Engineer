@@ -50,7 +50,8 @@ class input {
 		        if (std::filesystem::is_directory(f)) {
                     count_folder ++;
                     std::string subpath = f.path();
-                    std::string content;
+                    int down_pos = subpath.rfind("/");
+                    std::string folder_name = subpath.substr(down_pos + 1);
                     subpath += "/stdin_format.txt";
                     std::ifstream rfile;
                     rfile.open(subpath, std::ios::in);
@@ -69,14 +70,14 @@ class input {
                             for (int i = 1; i <= 3; i++) {
                                 int res = random_int(l_lim, r_lim);
                                 std::fstream rwrite;
-                                rwrite.open("./r_input/"+ std::to_string(count_folder) +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
+                                rwrite.open("./r_input/"+ folder_name +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
                                 rwrite <<  std::to_string(res) << " ";
                             }
                         } else if (cur_token.substr(0,4) == "char") {
                             for (int i = 1; i <= 3; i++) {
                                 char res = random_char();
                                 std::fstream rwrite;
-                                rwrite.open("./r_input/" + std::to_string(count_folder) +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
+                                rwrite.open("./r_input/" + folder_name +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
                                 rwrite << res << " ";
                             }
                         } else if (cur_token.substr(0,6) == "string") {
@@ -90,7 +91,7 @@ class input {
                             for (int i = 1; i <= 3; i++) {
                                 std::string res = random_string(l_lim, r_lim);
                                 std::fstream rwrite;
-                                rwrite.open("./r_input/" + std::to_string(count_folder) +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
+                                rwrite.open("./r_input/" + folder_name +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
                                 rwrite << res << " ";
                             }
                         }
