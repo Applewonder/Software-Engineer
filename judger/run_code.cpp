@@ -15,6 +15,8 @@ class run_code {
     private:
         std::map<std::string, std::set<std::string>> file_import;
     public:
+        run_code():file_import(){
+        }
 
         void insert_map(std::string path_to_folder, std::string path_to_file) {
             file_import[path_to_file].insert(path_to_file);

@@ -12,7 +12,7 @@
 
 //output_path:./r_output/folder_name/file.txt
 
-class judge_diff : output{
+class judge_diff : public output{
     private:
         run_code run;
     public:
