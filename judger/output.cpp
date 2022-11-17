@@ -31,14 +31,14 @@ class output {
                 for (auto it = equiv.begin(); it != equiv.end(); it ++) {
                     std::string file_1 = it->first;
                     std::string file_2 = it->second;
-                    target_file << file_1.substr(5) << "," << file_2.substr(5) << std::endl;
+                    target_file << file_1.substr(5) + ".cpp" << "," << file_2.substr(5) + ".cpp" << std::endl;
                 }
             } else {
                 target_file << "file1" << "," << "file2" << std::endl;
                 for (auto it = in_equiv.begin(); it != in_equiv.end(); it ++) {
                     std::string file_1 = it->first;
                     std::string file_2 = it->second;
-                    target_file << file_1.substr(5) << "," << file_2.substr(5) << std::endl;
+                    target_file << file_1.substr(5) + ".cpp" << "," << file_2.substr(5) + ".cpp" << std::endl;
                 }
             }
         }

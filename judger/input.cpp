@@ -13,12 +13,17 @@
 
 class input {
     private:
-        
-
-
-
-
+        int input_num;
     public:
+
+        input(int input_n)
+        :input_num(input_n)        
+        {}
+
+        int get_input_num() {
+            return input_num;
+        }
+
         int random_int(int a, int b) {
             int res = (rand () % (b-a+1)) + a;
             return res;
@@ -68,14 +73,14 @@ class input {
                             std::string right_limit = num_range.substr(pos+1);
                             int l_lim = std::stoi(left_limit);
                             int r_lim = std::stoi(right_limit);
-                            for (int i = 1; i <= 3; i++) {
+                            for (int i = 1; i <= input_num; i++) {
                                 int res = random_int(l_lim, r_lim);
                                 std::fstream rwrite;
                                 rwrite.open("./r_input/"+ folder_name +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
                                 rwrite <<  std::to_string(res) << " ";
                             }
                         } else if (cur_token.substr(0,4) == "char") {
-                            for (int i = 1; i <= 3; i++) {
+                            for (int i = 1; i <= input_num; i++) {
                                 char res = random_char();
                                 std::fstream rwrite;
                                 rwrite.open("./r_input/" + folder_name +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
@@ -89,7 +94,7 @@ class input {
                             std::string right_limit = num_range.substr(pos+1);
                             int l_lim = std::stoi(left_limit);
                             int r_lim = std::stoi(right_limit);
-                            for (int i = 1; i <= 3; i++) {
+                            for (int i = 1; i <= input_num; i++) {
                                 std::string res = random_string(l_lim, r_lim);
                                 std::fstream rwrite;
                                 rwrite.open("./r_input/" + folder_name +"/" + std::to_string(i) + ".txt", std::ios::out | std::ios::app);
