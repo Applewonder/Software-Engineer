@@ -9,8 +9,8 @@
 
 class output {
     private:
-        std::set<std::string> equiv;
-        std::set<std::string> in_equiv;
+        std::set<std::pair<std::string, std::string>> equiv;
+        std::set<std::pair<std::string, std::string>> in_equiv;
 
     public:
 
@@ -27,28 +27,28 @@ class output {
             std::ofstream target_file;
             target_file.open(path_to_file, std::ios::out|std::ios::app);
             if (is_equal) {
+                target_file << "file1" << "," << "file2" << std::endl;
                 for (auto it = equiv.begin(); it != equiv.end(); it ++) {
-                    for (auto it_sec = it; it_sec != equiv.end(); it_sec ++) {
-                        if (it_sec == it) it_sec ++;
-                        target_file << *it << ", " << *it_sec << std::endl;
-                    }
+                    std::string file_1 = it->first;
+                    std::string file_2 = it->second;
+                    target_file << file_1.substr(5) << "," << file_2.substr(5) << std::endl;
                 }
             } else {
+                target_file << "file1" << "," << "file2" << std::endl;
                 for (auto it = in_equiv.begin(); it != in_equiv.end(); it ++) {
-                    for (auto it_sec = it; it_sec != in_equiv.end(); it_sec ++) {
-                        if (it_sec == it) it_sec ++;
-                        target_file << *it << ", " << *it_sec << std::endl;
-                    }
+                    std::string file_1 = it->first;
+                    std::string file_2 = it->second;
+                    target_file << file_1.substr(5) << "," << file_2.substr(5) << std::endl;
                 }
             }
         }
 
-        void insert_equiv(std::string path_to_file) {
-            equiv.insert(path_to_file);
+        void insert_equiv(std::string path_to_file_1, std::string path_to_file_2) {
+            equiv.insert(std::make_pair(path_to_file_1, path_to_file_2));
         }
 
-        void insert_in_equiv(std::string path_to_file) {
-            in_equiv.insert(path_to_file);
+        void insert_in_equiv(std::string path_to_file_1, std::string path_to_file_2) {
+            in_equiv.insert(std::make_pair(path_to_file_1, path_to_file_2));
         }
 
 };

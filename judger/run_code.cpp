@@ -19,7 +19,7 @@ class run_code {
         }
 
         void insert_map(std::string path_to_folder, std::string path_to_file) {
-            file_import[path_to_file].insert(path_to_file);
+            file_import[path_to_folder].insert(path_to_file);
         }
 
         std::set<std::string> get_file_set(std::string path_to_folder) {
@@ -30,19 +30,19 @@ class run_code {
             for (auto& f : std::filesystem::directory_iterator("./../input")) {
                 if (std::filesystem::is_directory(f)) {
                     std::string subpath = f.path();
-                    int l_cut = subpath.find("/");
+                    int l_cut = subpath.rfind("/");
                     std::string folder_name = subpath.substr(l_cut + 1);
                     for (auto& test_file : std::filesystem::directory_iterator(subpath)) {
                         std::string path = test_file.path();
                         if (path.length() < 4) continue;
-                        int pos = path.find(".");
+                        int pos = path.rfind(".");
                         std::string succdex = path.substr(pos);
                         if (succdex == ".cpp") {
                             int down_pos = path.rfind("/");
                             std::string file_name = path.substr(0, pos);
                             insert_map(subpath, file_name);
                             file_name = file_name.substr(down_pos + 1);
-                            std::string compile_command = "gcc " + path + " -o ./r_compile/" + folder_name + "/" + file_name;
+                            std::string compile_command = "g++ " + path + " -o ./r_compile/" + folder_name + "/" + file_name;
                             std::cout << compile_command << std::endl;
                             system(compile_command.c_str());
                         } 
