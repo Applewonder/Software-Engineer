@@ -42,7 +42,7 @@ class run_code {
                             std::string file_name = path.substr(0, pos);
                             insert_map(subpath, file_name);
                             file_name = file_name.substr(down_pos + 1);
-                            std::string compile_command = "g++ " + path + " -o ./r_compile/" + folder_name + "/" + file_name;
+                            std::string compile_command = "g++ " + path + " -w -o ./r_compile/" + folder_name + "/" + file_name;
                             std::cout << compile_command << std::endl;
                             system(compile_command.c_str());
                         } 

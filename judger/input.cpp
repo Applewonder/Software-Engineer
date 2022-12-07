@@ -16,7 +16,7 @@ class input {
         int input_num;
     public:
 
-        input(int input_n)
+        explicit input(int input_n)
         :input_num(input_n)        
         {}
 

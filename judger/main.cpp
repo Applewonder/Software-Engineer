@@ -8,9 +8,6 @@ int main() {
     int input_n;
     std::cin >> input_n;
     judge_diff auto_judge(input_n);
-
     auto_judge.save_res();
-    
-    
     return 0;
 }
